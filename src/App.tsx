@@ -7,6 +7,7 @@ import { Inspector } from './components/Inspector';
 import { ProductList } from './components/ProductList';
 import { SelectionBar } from './components/SelectionBar';
 import { DesignsDialog } from './components/DesignsDialog';
+import { ProductPanel } from './components/ProductPanel';
 
 type Tab = 'selectie' | 'ruimte' | 'lijst';
 
@@ -71,7 +72,7 @@ export default function App() {
       <Toolbar onOpenDesigns={() => setDesignsOpen(true)} onToggleProducts={() => setProductsOpen((v) => !v)} />
       <div className="main">
         <aside className={`panel panel-left${productsOpen ? ' open' : ''}`} aria-label="Producten">
-          <div className="panel-placeholder hint">Productpaneel volgt.</div>
+          <ProductPanel onPlaced={() => setProductsOpen(false)} />
         </aside>
         {productsOpen && <div className="scrim" onClick={() => setProductsOpen(false)} />}
 
