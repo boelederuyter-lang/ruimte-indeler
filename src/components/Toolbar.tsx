@@ -10,8 +10,6 @@ export function Toolbar({ onOpenDesigns, onToggleProducts }: { onOpenDesigns: ()
   const setView = useStore((s) => s.setView);
   const snap = useStore((s) => s.snap);
   const setSnap = useStore((s) => s.setSnap);
-  const wallStyle = useStore((s) => s.wallStyle);
-  const setWallStyle = useStore((s) => s.setWallStyle);
 
   return (
     <header className="toolbar">
@@ -36,17 +34,11 @@ export function Toolbar({ onOpenDesigns, onToggleProducts }: { onOpenDesigns: ()
         </button>
       </div>
 
-      {view === '2d' ? (
+      {view === '2d' && (
         <label className="toggle" title="Uitlijnen op raster van 10 cm">
           <input type="checkbox" checked={snap} onChange={(e) => setSnap(e.target.checked)} />
           <span>Raster</span>
         </label>
-      ) : (
-        <select className="wall-style" value={wallStyle} onChange={(e) => setWallStyle(e.target.value as typeof wallStyle)} aria-label="Muren" title="Weergave van de muren">
-          <option value="transparant">Muren transparant</option>
-          <option value="laag">Muren laag</option>
-          <option value="vol">Muren vol</option>
-        </select>
       )}
 
       <div className="segmented" role="group" aria-label="Weergave">

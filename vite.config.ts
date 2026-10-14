@@ -5,6 +5,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   base: './',
   plugins: [react()],
+  // Three.js is groot; de 3D-code wordt pas geladen als je naar 3D wisselt.
+  build: { chunkSizeWarningLimit: 1000 },
   test: {
     environment: 'node',
   },

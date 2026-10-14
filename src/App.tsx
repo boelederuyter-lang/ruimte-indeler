@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useStore } from './store/useStore';
 import { Toolbar } from './components/Toolbar';
 import { FloorPlan2D } from './components/plan2d/FloorPlan2D';
@@ -8,6 +8,9 @@ import { ProductList } from './components/ProductList';
 import { SelectionBar } from './components/SelectionBar';
 import { DesignsDialog } from './components/DesignsDialog';
 import { ProductPanel } from './components/ProductPanel';
+
+// 3D wordt pas geladen als je ernaar wisselt; zo opent de 2D-weergave snel.
+const Scene3D = lazy(() => import('./components/view3d/Scene3D'));
 
 type Tab = 'selectie' | 'ruimte' | 'lijst';
 
@@ -77,7 +80,13 @@ export default function App() {
         {productsOpen && <div className="scrim" onClick={() => setProductsOpen(false)} />}
 
         <main className="stage">
-          {view === '2d' ? <FloorPlan2D /> : <div className="hint">3D volgt.</div>}
+          {view === '2d' ? (
+            <FloorPlan2D />
+          ) : (
+            <Suspense fallback={<div className="stage-loading hint">3D laden…</div>}>
+              <Scene3D />
+            </Suspense>
+          )}
           <SelectionBar
             onDetails={() => {
               setTab('selectie');

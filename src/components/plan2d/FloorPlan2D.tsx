@@ -403,7 +403,7 @@ function WallDistances({ item, room, s }: { item: PlacedItem; room: Room; s: num
         <g key={sg.key}>
           <line x1={sg.x1} y1={sg.y1} x2={sg.x2} y2={sg.y2} strokeWidth={1} strokeDasharray="4 3" />
           {Math.hypot(sg.x2 - sg.x1, sg.y2 - sg.y1) * s > 26 && (
-            <text x={(sg.x1 + sg.x2) / 2} y={(sg.y1 + sg.y2) / 2} fontSize={fs} textAnchor="middle" dominantBaseline="middle" strokeWidth={3 / s}>
+            <text x={(sg.x1 + sg.x2) / 2} y={(sg.y1 + sg.y2) / 2} fontSize={fs} textAnchor="middle" dominantBaseline="middle" strokeWidth={6 / s}>
               {Math.round(sg.v)}
             </text>
           )}
